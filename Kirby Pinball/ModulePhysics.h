@@ -50,10 +50,15 @@ public:
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 
+public:
+	b2Body* big_ball;
+
 private:
 
 	bool debug;
 	b2World* world;
+	b2DistanceJoint* distance_joint;
 	b2MouseJoint* mouse_joint;
 	b2Body* ground;
+
 };
