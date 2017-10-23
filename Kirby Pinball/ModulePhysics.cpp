@@ -31,28 +31,47 @@ bool ModulePhysics::Start()
 	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
 	world->SetContactListener(this);
 
-	// needed to create joints like mouse joint
-	b2BodyDef bd;
-	ground = world->CreateBody(&bd);
 
-	// big static circle as "ground" in the middle of the screen
-	int x = SCREEN_WIDTH / 2;
-	int y = SCREEN_HEIGHT / 1.5f;
-	int diameter = SCREEN_WIDTH / 2;
+	//map collisions
+	int map_vertex[66] = 
+	{
+		4, 177,
+	4, 110,
+	9, 102,
+	9, 97,
+	4, 85,
+	4, 14,
+	8, 6,
+	15, 2,
+	21, 1,
+	101, 1,
+	108, 3,
+	114, 8,
+	118, 14,
+	118, 172,
+	112, 172,
+	112, 14,
+	108, 10,
+	103, 11,
+	110, 15,
+	110, 76,
+	104, 82,
+	104, 87,
+	110, 90,
+	110, 102,
+	104, 105,
+	104, 109,
+	108, 112,
+	108, 176,
+	63, 191,
+	63, 214,
+	49, 214,
+	49, 191,
+	6, 177
+	};
 
-	b2BodyDef body;
-	body.type = b2_staticBody;
-	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-
-	big_ball = world->CreateBody(&body);
-
-	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(diameter) * 0.5f;
-
-	b2FixtureDef fixture;
-	fixture.shape = &shape;
-	big_ball->CreateFixture(&fixture);
-
+	map = CreateChain(10,10, map_vertex,66);
+	map->body->SetType(b2_staticBody);
 	return true;
 }
 
@@ -282,7 +301,7 @@ update_status ModulePhysics::PostUpdate()
 	// so we can pull it around
 	// TODO 2: If a body was selected, create a mouse joint
 	// using mouse_joint class property
-	if (found != nullptr)
+	/*if (found != nullptr)
 	{
 		b2MouseJointDef def;
 		def.bodyA = ground;
@@ -309,7 +328,7 @@ update_status ModulePhysics::PostUpdate()
 		motor_def.maxTorque = 0.0f;
 
 
-	}
+	}*/
 
 
 	// TODO 3: If the player keeps pressing the mouse button, update
