@@ -75,99 +75,97 @@ bool ModulePhysics::Start()
 	//bottom left
 	int map_vertex_1[20]
 	{
-		25, 173,
-		29, 169,
-		19, 164,
-		14, 161,
-		11, 157,
-		11, 122,
-		10, 122,
-		10, 163,
-		18, 171,
-		25, 171
+		25, 172,
+		29, 168,
+		19, 163,
+		14, 160,
+		11, 156,
+		11, 121,
+		10, 121,
+		10, 162,
+		18, 170,
+		25, 170
 	};
 
 	//bottom right
 
-	int map_vertex_2[20]
+	int map_vertex_2[16]
 	{
-		102, 163,
-		96, 169,
-		86, 174,
-		86, 172,
-		83, 169,
-		98, 161,
+		101, 121,
 		101, 157,
-		101, 122,
-		102, 122,
-		102, 163
+		96, 162,
+		83, 168,
+		87, 173,
+		97, 168,
+		102, 161,
+		102, 121,
 	};
 
 	//bottom left blue triangle
 	int map_vertex_3[12]
 	{
-		26, 159,
-		17, 156,
-		17, 131,
-		24, 143,
-		28, 156,
-		26, 159
+		26, 158,
+		17, 155,
+		17, 130,
+		24, 142,
+		28, 155,
+		26, 158
 	};
 
 	//bottom right blue triangle
 	int map_vertex_4[12]
 	{
-		95, 155,
-		95, 130,
-		88, 143,
-		84, 157,
-		87, 160,
-		95, 155
+		95, 154,
+		95, 129,
+		88, 142,
+		84, 156,
+		87, 159,
+		95, 154
 	};
 
 	//inverted big L
 	int map_vertex_5[36]
 	{
-		19, 87,
-		17, 90,
-		14, 90,
-		10, 86,
-		10, 19,
-		16, 11,
-		24, 9,
-		40, 9,
-		50, 12,
-		55, 18,
-		41, 18,
-		37, 10,
-		27, 10,
-		23, 18,
-		16, 18,
-		12, 25,
-		12, 83,
-		19, 87
+		19, 86,
+		17, 89,
+		14, 89,
+		10, 85,
+		10, 18,
+		16, 10,
+		24, 8,
+		40, 8,
+		50, 11,
+		55, 17,
+		41, 17,
+		37, 9,
+		27, 9,
+		23, 17,
+		16, 17,
+		12, 24,
+		12, 82,
+		19, 86
 	};
 
 	//central map 
 	int map_vertex_6[34]
 	{
-		55, 90,
-		53, 87,
-		60, 83,
-		60, 46,
-		62, 44,
-		64, 46,
-		64, 51,
-		66, 51,
-		66, 57,
-		64, 57,
-		64, 59,
-		66, 59,
-		66, 65,
-		64, 65,
-		64, 84,
-		57, 90,
-		55, 90
+		55, 89,
+		53, 86,
+		60, 82,
+		60, 45,
+		62, 43,
+		64, 45,
+		64, 50,
+		66, 50,
+		66, 56,
+		64, 56,
+		64, 58,
+		66, 58,
+		66, 64,
+		64, 64,
+		64, 83,
+		57, 89,
+		55, 89
 	};
 
 	//pink stuff right
@@ -175,98 +173,113 @@ bool ModulePhysics::Start()
 	{
 		95, 18,
 		99, 18,
-		103, 24,
-		103, 28,
-		99, 34,
-		93, 34,
-		93, 18
+		103, 23,
+		103, 27,
+		99, 33,
+		93, 33,
+		93, 17
 	};
 
 	//pink stuff right 2
 	int map_vertex_8[10]
 	{
-		87, 19,
-		87, 34,
-		84, 34,
-		84, 19,
-		87, 19
+		87, 18,
+		87, 33,
+		84, 33,
+		84, 18,
+		87, 18
 	};
 
 	//pink stuff left 2
 	int map_vertex_9[10]
 	{
-		78, 34,
-		78, 19,
-		75, 19,
-		75, 34,
-		78, 34
+		78, 32,
+		78, 18,
+		75, 18,
+		75, 33,
+		78, 33
 	};
 
 	//pink stuff left
 	int map_vertex_10[10]
 	{
-		69, 19,
-		69, 34,
-		66, 34,
-		66, 19,
-		69, 19
+		69, 18,
+		69, 33,
+		66, 33,
+		66, 18,
+		69, 18
 	};
 
 	//top semicircle
 	int map_vertex_11[20]
 	{
-		29, 16,
-		30, 13,
-		32, 12,
-		34, 13,
-		35, 16,
-		36, 16,
-		36, 13,
-		32, 10,
-		28, 13,
-		28, 16
+		29, 15,
+		30, 12,
+		32, 11,
+		34, 12,
+		35, 15,
+		36, 15,
+		36, 12,
+		32, 9,
+		28, 12,
+		28, 15
 	};
 
 	//right semicircle
 	int map_vertex_12[12]
 	{
-		106, 94,
-		111, 95,
-		111, 101,
-		106, 102,
-		108, 98,
-		106, 94
+		106, 93,
+		111, 94,
+		111, 100,
+		106, 101,
+		108, 97,
+		106, 93
 	};
 
 	//weird little things right
 	int map_vertex_13[10]
 	{
-		108, 72,
-		108, 51,
-		110, 51,
-		110, 72,
-		108, 72
+		108, 71,
+		108, 50,
+		110, 50,
+		110, 71,
+		108, 71
 	};
 
 	//chains
 	map = CreateChain(10, 10, map_vertex, 66);
-	map = CreateChain(10, 10, map_vertex_1, 20);
-	//map = CreateChain(10, 10, map_vertex_2, 22);
-	//map = CreateChain(10, 10, map_vertex_3, 12);
-	//map = CreateChain(10, 10, map_vertex_4, 12);
-	//map = CreateChain(10, 10, map_vertex_5, 36);
-	//map = CreateChain(10, 10, map_vertex_6, 34);
-	map = CreateChain(10, 10, map_vertex_7, 14);
-	//map = CreateChain(10, 10, map_vertex_8, 10);
-	//map = CreateChain(10, 10, map_vertex_9, 10);
-	//map = CreateChain(10, 10, map_vertex_10, 10);
-	map = CreateChain(10, 10, map_vertex_11, 20);
-	//map = CreateChain(10, 10, map_vertex_12, 12);
-	//map = CreateChain(10, 10, map_vertex_13, 10);
+	map_1 = CreateChain(10, 10, map_vertex_1, 20);
+	map_2 = CreateChain(10, 10, map_vertex_2, 16);  
+	map_3 = CreateChain(10, 10, map_vertex_3, 10);
+	map_4 = CreateChain(10, 10, map_vertex_4, 10);
+	map_5 = CreateChain(10, 10, map_vertex_5, 34);
+	map_6 = CreateChain(10, 10, map_vertex_6, 32);
+	map_7 = CreateChain(10, 10, map_vertex_7, 14);
+	map_8 = CreateChain(10, 10, map_vertex_8, 8);
+	map_9 = CreateChain(10, 10, map_vertex_9, 8);
+	map_10 = CreateChain(10, 10, map_vertex_10, 8);
+	map_11 = CreateChain(10, 10, map_vertex_11, 20);
+	map_12 = CreateChain(10, 10, map_vertex_12, 10);
+	map_13 = CreateChain(10, 10, map_vertex_13, 8);
 
 
 	//setting it all to static
 	map->body->SetType(b2_staticBody);
+	map_1->body->SetType(b2_staticBody);
+	map_2->body->SetType(b2_staticBody);
+	map_3->body->SetType(b2_staticBody);
+	map_4->body->SetType(b2_staticBody);
+	map_5->body->SetType(b2_staticBody);
+	map_6->body->SetType(b2_staticBody);
+	map_7->body->SetType(b2_staticBody);
+	map_8->body->SetType(b2_staticBody);
+	map_9->body->SetType(b2_staticBody);
+	map_10->body->SetType(b2_staticBody);
+	map_11->body->SetType(b2_staticBody);
+	map_12->body->SetType(b2_staticBody);
+	map_13->body->SetType(b2_staticBody);
+
+
 	return true;
 }
 

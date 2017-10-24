@@ -1,4 +1,4 @@
-//pal hockey esquerra
+//pal hockey esquerra  ///pivot a 0,0 al codi està a 0,1
 
 int Map[18] = {
 	25, 173,
@@ -16,16 +16,15 @@ int Map[18] = {
 //pal hockey dreta (si funciona millor així quan testejem afegire un altre vertex al esquerra
 
 int Map[20] = {
-	102, 163,
-	96, 169,
-	86, 174,
-	86, 172,
-	83, 169,
-	98, 161,
+	101, 121,
 	101, 157,
-	101, 122,
-	102, 122,
-	102, 163
+	96, 162,
+	83, 168,
+	87, 173,
+	97, 168,
+	102, 161,
+	102, 121,
+	101, 121
 };
 
 //triangle esquerra
