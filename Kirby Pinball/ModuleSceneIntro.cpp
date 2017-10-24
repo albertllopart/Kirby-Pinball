@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModulePlayer.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -32,7 +33,20 @@ bool ModuleSceneIntro::Start()
 	map_texture = App->textures->Load("pinball/Map.png");
 
 	
-	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+
+	//obstacles
+	circle_obstacles.add(App->physics->CreateCircleObstacle(34, 60, 6.5f));
+	circle_obstacles.getLast()->data->listener = this;
+
+	circle_obstacles.add(App->physics->CreateCircleObstacle(98, 60, 6.5f));
+	circle_obstacles.getLast()->data->listener = this;
+
+	circle_obstacles.add(App->physics->CreateCircleObstacle(58, 43, 6.5f));
+	circle_obstacles.getLast()->data->listener = this;
+
+	circle_obstacles.add(App->physics->CreateCircleObstacle(90, 83, 6.5f));
+	circle_obstacles.getLast()->data->listener = this;
 
 	return ret;
 }
@@ -58,7 +72,7 @@ update_status ModuleSceneIntro::Update()
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 3));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 2.5f));
 		circles.getLast()->data->listener = this;
 	}
 
@@ -127,6 +141,12 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
 		c = c->next;
 	}
+
+	//player
+	int x, y;
+	App->player->ball->GetPosition(x, y);
+	App->renderer->Blit(circle, x, y, NULL, 1.0f, App->player->ball->GetRotation());
+
 
 	c = boxes.getFirst();
 

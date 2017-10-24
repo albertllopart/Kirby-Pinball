@@ -13,6 +13,10 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	PhysBody* CreatePlayerBall();
+
 public:
+
+	PhysBody* ball;
 
 };

@@ -43,6 +43,7 @@ public:
 	bool CleanUp();
 
 	PhysBody* CreateCircle(int x, int y, int radius);
+	PhysBody* CreateCircleObstacle(int x, int y, int radius);
 	PhysBody* CreateRectangle(int x, int y, int width, int height);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size);
@@ -53,11 +54,12 @@ public:
 public:
 	b2Body* big_ball;
 	PhysBody* map;
+	b2World* world;
 
 private:
 
 	bool debug;
-	b2World* world;
+	
 	b2DistanceJoint* distance_joint;
 	b2MouseJoint* mouse_joint;
 	b2Body* ground;

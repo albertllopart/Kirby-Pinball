@@ -1,6 +1,9 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModulePlayer.h"
+#include "ModulePhysics.h"
+#include "ModuleRender.h"
+#include "ModuleSceneIntro.h"
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -13,6 +16,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
+	ball = CreatePlayerBall();
 	return true;
 }
 
@@ -27,7 +31,33 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	
 	return UPDATE_CONTINUE;
+}
+
+PhysBody* ModulePlayer::CreatePlayerBall()
+{
+	b2BodyDef body;
+	body.type = b2_staticBody;
+	body.position.Set(40, 65);
+
+	b2Body* b = App->physics->world->CreateBody(&body);
+
+	b2CircleShape shape;
+	shape.m_radius = 30;
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
+	fixture.density = 1.0f;
+	fixture.restitution = 0.3f;
+
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = pbody->height = 2.5f;
+
+	return pbody;
 }
 
 

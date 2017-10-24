@@ -32,4 +32,7 @@ public:
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
+
+	//obstacles
+	p2List<PhysBody*> circle_obstacles;
 };
