@@ -2,6 +2,8 @@
 #include "Module.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include "ModuleTextures.h"
+#include "ModulePhysics.h"
 
 class ModulePlayer : public Module
 {
@@ -17,6 +19,19 @@ public:
 
 public:
 
+	//ball
 	PhysBody* ball;
+
+	//flippers
+	PhysBody* flippers[2];
+	PhysBody* flipper_anchor[2];
+	b2RevoluteJoint* flipper_joints[2];
+	SDL_Rect* flipper_sprites[2];
+
+	//mini flippers
+	PhysBody* mini_flippers[2];
+	PhysBody* mini_flipper_anchor[2];
+	b2RevoluteJoint* mini_flipper_joints[2];
+	SDL_Rect* mini_flipper_sprites[2];
 
 };

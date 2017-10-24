@@ -1,3 +1,13 @@
+//flipper esquerra
+int Flipper1[10] = {
+	49, 180,
+	49, 175,
+	30, 167,
+	27, 173,
+	36, 177
+};
+
+
 //pal hockey esquerra  ///pivot a 0,0 al codi està a 0,1
 
 int Map[18] = {

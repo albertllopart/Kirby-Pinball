@@ -1,0 +1,9 @@
+// Pivot 0, 0
+int CompleteMap[2] = {
+	199, -12
+};
+
+// Pivot 0.000000, 0.000000
+float CompleteMap[2] = {
+	1.658333f, -0.062500f
+};

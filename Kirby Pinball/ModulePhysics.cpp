@@ -352,6 +352,51 @@ PhysBody* ModulePhysics::CreateCircleObstacle(int x, int y, int radius)
 	return pbody;
 }
 
+PhysBody* ModulePhysics::CreateFlipper(b2Vec2 points[], int size, float angle) {
+	b2BodyDef body;
+	body.type = b2_dynamicBody;
+	body.angle = angle * DEGTORAD;
+
+	b2Body* b = App->physics->world->CreateBody(&body);
+	b2PolygonShape flipper;
+	flipper.Set(points, size);
+
+	b2FixtureDef fixture;
+	fixture.density = 1.0f;
+	fixture.shape = &flipper;
+
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = pbody->height = 0;
+
+	return pbody;
+}
+
+b2RevoluteJoint* ModulePhysics::CreateFlipperRevoluteJoint(b2Body* bodyA, b2Body* bodyB, b2Vec2 setBodyA, float upperAngle, float lowerAngle) {
+
+	b2RevoluteJointDef jointDef;
+	jointDef.bodyA = bodyA;
+	jointDef.bodyB = bodyB;
+	jointDef.collideConnected = false;
+
+	b2Vec2 setA = setBodyA;
+	b2Vec2 setB = bodyB->GetLocalCenter();
+
+	jointDef.localAnchorA.Set(setA.x, setA.y);
+	jointDef.localAnchorB.Set(setB.x, setB.y);
+
+	jointDef.enableLimit = true;
+	jointDef.upperAngle = upperAngle * DEGTORAD;
+	jointDef.lowerAngle = lowerAngle * DEGTORAD;
+
+	b2RevoluteJoint* revoluteJoint = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
+
+	return revoluteJoint;
+}
+
 PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
 {
 	b2BodyDef body;
