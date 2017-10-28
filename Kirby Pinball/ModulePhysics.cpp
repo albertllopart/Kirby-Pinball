@@ -31,6 +31,9 @@ bool ModulePhysics::Start()
 	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
 	world->SetContactListener(this);
 
+	leftKickers = new p2List<PhysBody*>;
+	rightKickers = new p2List<PhysBody*>;
+
 
 	//map collisions
 
@@ -279,6 +282,8 @@ bool ModulePhysics::Start()
 	map_12->body->SetType(b2_staticBody);
 	map_13->body->SetType(b2_staticBody);
 
+	//kickers
+	BuildLeftKickers(leftKickers);
 
 	return true;
 }
@@ -397,15 +402,17 @@ b2RevoluteJoint* ModulePhysics::CreateFlipperRevoluteJoint(b2Body* bodyA, b2Body
 	return revoluteJoint;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2BodyType type)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
 	b2PolygonShape box;
 	box.SetAsBox(PIXEL_TO_METERS(width) * 0.5f, PIXEL_TO_METERS(height) * 0.5f);
+
+
 
 	b2FixtureDef fixture;
 	fixture.shape = &box;
@@ -576,43 +583,7 @@ update_status ModulePhysics::PostUpdate()
 		}
 	}
 
-	// If a body was selected we will attach a mouse joint to it
-	// so we can pull it around
-	// TODO 2: If a body was selected, create a mouse joint
-	// using mouse_joint class property
-	/*if (found != nullptr)
-	{
-		b2MouseJointDef def;
-		def.bodyA = ground;
-		def.bodyB = found;
-		def.target = mouse_position;
-		def.dampingRatio = 0.5f;
-		def.frequencyHz = 2.0f;
-		def.maxForce = 100.0f * found->GetMass();
-
-		mouse_joint = (b2MouseJoint*)world->CreateJoint(&def);
-
-		//distance
-		b2DistanceJointDef distance_def;
-		distance_def.Initialize(big_ball, found, big_ball->GetWorldCenter(), found->GetWorldCenter());
-		distance_def.dampingRatio = 0.5f;
-		distance_def.frequencyHz = 2.0f;
-		distance_joint = (b2DistanceJoint*)world->CreateJoint(&distance_def);
-
-		//motor
-		b2MotorJointDef motor_def;
-		motor_def.Initialize(big_ball, found);
-
-		motor_def.maxForce = 50.0f;
-		motor_def.maxTorque = 0.0f;
-
-
-	}*/
-
-
-	// TODO 3: If the player keeps pressing the mouse button, update
-	// target position and draw a red line between both anchor points
-
+	
 	//mouse joint
 	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT && mouse_joint != nullptr)
 	{
@@ -682,6 +653,43 @@ bool PhysBody::Contains(int x, int y) const
 	return false;
 }
 
+PhysBody* ModulePhysics::CreatePolygon(int x, int y, int* points, int size, float dens, int rest, int filterIndex, b2BodyType type)
+{
+	b2BodyDef body;
+	body.type = type;
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&body);
+	b2PolygonShape shape;
+
+
+	b2Vec2* p = new b2Vec2[size / 2];
+
+	for (uint i = 0; i < size / 2; ++i)
+	{
+		p[i].x = PIXEL_TO_METERS(points[i * 2 + 0]);
+		p[i].y = PIXEL_TO_METERS(points[i * 2 + 1]);
+	}
+	shape.Set(p, size / 2);
+
+
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
+	fixture.density = dens;
+	fixture.restitution = rest;
+	fixture.filter.groupIndex = filterIndex;
+
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = 0;
+	pbody->height = 0;
+
+	return pbody;
+}
+
 int PhysBody::RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& normal_y) const
 {
 	int ret = -1;
@@ -726,4 +734,35 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 
 	if(physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
+}
+
+PhysBody * ModulePhysics::CreateKicker(int kickerX, int kickerY, int* points, int size)
+{
+	return CreatePolygon(kickerX, kickerY, points, size, 100, 0, -2, b2_dynamicBody);
+}
+
+void ModulePhysics::BuildLeftKickers(p2List<PhysBody*>* leftKickers)
+{
+	int kicker1[10] = {
+		49, 180,
+		49, 175,
+		30, 167,
+		27, 173,
+		36, 177
+	};
+
+	PhysBody* k = CreateKicker(30, 12, kicker1, 10);
+	PhysBody* k2 = CreateRectangle(30, 12, 1, 1, b2_staticBody);
+
+	revolutedef.bodyA = k2->body;
+	revolutedef.bodyB = k->body;
+	revolutedef.localAnchorB = b2Vec2(0.1, 0.1);
+	revolutedef.enableLimit = true;
+	revolutedef.lowerAngle = -(3.14 / 3);
+	revolutedef.upperAngle = (3.14 / 32);
+	revolutedef.collideConnected = false;
+	revolute_joint = (b2RevoluteJoint*)world->CreateJoint(&revolutedef);
+
+	leftKickers->add(k);
+
 }
