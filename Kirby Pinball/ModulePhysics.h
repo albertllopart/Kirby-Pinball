@@ -49,11 +49,12 @@ public:
 	PhysBody* CreateChain(int x, int y, int* points, int size);
 	PhysBody* CreateFlipper(b2Vec2 points[], int size, float angle);
 	PhysBody* CreatePolygon(int x, int y, int* points, int size, float dens, int rest, int filterIndex, b2BodyType type);
-	
+	p2List<PhysBody*>* GetLeftKickers();
+
 	b2RevoluteJoint* CreateFlipperRevoluteJoint(b2Body* bodyA, b2Body* bodyB, b2Vec2 setBodyA, float upperAngle, float lowerAngle);
 	void BuildLeftKickers(p2List<PhysBody*>* leftKickers);
 	PhysBody* CreateKicker(int kickerX, int kickerY, int* points, int size);
-
+	void KickersForce(b2Vec2 vectforce, b2Vec2 posit, sides rl);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);

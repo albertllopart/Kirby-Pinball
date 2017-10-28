@@ -766,3 +766,30 @@ void ModulePhysics::BuildLeftKickers(p2List<PhysBody*>* leftKickers)
 	leftKickers->add(k);
 
 }
+
+//kickers force
+
+void ModulePhysics::KickersForce(b2Vec2 vectforce, b2Vec2 posit, sides rl) {
+	if (rl == LEFT)
+	{
+		p2List_item<PhysBody*>* item = leftKickers->getFirst();
+		while (item != nullptr)
+		{
+			item->data->body->ApplyForce(vectforce, posit, true);
+			item = item->next;
+		}
+	}
+	else if (rl == RIGHT) {
+		p2List_item<PhysBody*>* item = rightKickers->getFirst();
+		while (item != nullptr)
+		{
+			item->data->body->ApplyForce(vectforce, posit, true);
+			item = item->next;
+		}
+	}
+}
+
+p2List<PhysBody*>* ModulePhysics::GetLeftKickers()
+{
+	return leftKickers;
+}
