@@ -751,16 +751,18 @@ void ModulePhysics::BuildLeftKickers(p2List<PhysBody*>* leftKickers)
 		36, 177
 	};
 
-	PhysBody* k = CreateKicker(11,10, kicker1, 10);
-	PhysBody* k2 = CreateRectangle(44, 182, 1, 1, b2_staticBody);
+	PhysBody* k = CreateRectangle(50, 186, 17, 5, b2_dynamicBody); //186 //15
+	
+	//PhysBody* k = CreateKicker(11,10, kicker1, 10);//11,10
+	PhysBody* k2 = CreateRectangle(44, 182, 1, 1, b2_staticBody); //44
 
 	revolutedef.bodyA = k2->body;
 	revolutedef.bodyB = k->body;
-	revolutedef.localAnchorA = b2Vec2(0.1, 0.1);
-	revolutedef.localAnchorB = b2Vec2(12,10); //.9 3.2
+	//revolutedef.localAnchorA = b2Vec2(0.05, 0);
+	revolutedef.localAnchorB = b2Vec2(-0.08,0.0); //12,10
 	revolutedef.enableLimit = true;
-	revolutedef.lowerAngle = -(0.1*RADTODEG);
-	revolutedef.upperAngle = (1* RADTODEG);
+	revolutedef.lowerAngle = -(0.1);
+	revolutedef.upperAngle = (1.0);
 	revolutedef.collideConnected = false;
 	revolute_joint = (b2RevoluteJoint*)world->CreateJoint(&revolutedef);
 
