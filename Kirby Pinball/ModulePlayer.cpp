@@ -38,6 +38,10 @@ update_status ModulePlayer::Update()
 	{
 		App->physics->KickersForce(b2Vec2(0, 50), b2Vec2(0, 0), LEFT);
 	}
+	if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) )
+	{
+		App->physics->KickersForce(b2Vec2(0, -50), b2Vec2(0, 0), RIGHT);
+	}
 
 	return UPDATE_CONTINUE;
 }

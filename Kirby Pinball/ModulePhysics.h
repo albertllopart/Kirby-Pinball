@@ -54,6 +54,7 @@ public:
 
 	b2RevoluteJoint* CreateFlipperRevoluteJoint(b2Body* bodyA, b2Body* bodyB, b2Vec2 setBodyA, float upperAngle, float lowerAngle);
 	void BuildLeftKickers(p2List<PhysBody*>* leftKickers);
+	void BuildRightKickers(p2List<PhysBody*>* rightKickers);
 	PhysBody* CreateKicker(int kickerX, int kickerY, int* points, int size);
 	void KickersForce(b2Vec2 vectforce, b2Vec2 posit, sides rl);
 

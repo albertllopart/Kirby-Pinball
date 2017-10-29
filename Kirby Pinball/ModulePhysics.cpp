@@ -284,6 +284,7 @@ bool ModulePhysics::Start()
 
 	//kickers
 	BuildLeftKickers(leftKickers);
+	BuildRightKickers(rightKickers);
 
 	return true;
 }
@@ -743,26 +744,24 @@ PhysBody * ModulePhysics::CreateKicker(int kickerX, int kickerY, int* points, in
 
 void ModulePhysics::BuildLeftKickers(p2List<PhysBody*>* leftKickers)
 {
-	int kicker1[10] = {
+	/*int kicker1[10] = {
 		49, 180,
 		49, 175,
 		30, 167,
 		27, 173,
 		36, 177
-	};
+	};*/
 
-	PhysBody* k = CreateRectangle(50, 186, 17, 5, b2_dynamicBody); //186 //15
-	
-	//PhysBody* k = CreateKicker(11,10, kicker1, 10);//11,10
-	PhysBody* k2 = CreateRectangle(44, 182, 1, 1, b2_staticBody); //44
+
+	PhysBody* k = CreateRectangle(50, 186, 17, 5, b2_dynamicBody); //50/186/17/5/dynamic
+	PhysBody* k2 = CreateRectangle(44, 182, 1, 1, b2_staticBody); //44/182/1/1/static
 
 	revolutedef.bodyA = k2->body;
 	revolutedef.bodyB = k->body;
-	//revolutedef.localAnchorA = b2Vec2(0.05, 0);
-	revolutedef.localAnchorB = b2Vec2(-0.08,0.0); //12,10
+	revolutedef.localAnchorB = b2Vec2(-0.06,-0.03);    //-0.08,-0.03  (in green thw 100% working combinations in case you wanna test)
 	revolutedef.enableLimit = true;
 	revolutedef.lowerAngle = -(0.1);
-	revolutedef.upperAngle = (1.0);
+	revolutedef.upperAngle = (1.9);
 	revolutedef.collideConnected = false;
 	revolute_joint = (b2RevoluteJoint*)world->CreateJoint(&revolutedef);
 
@@ -770,8 +769,25 @@ void ModulePhysics::BuildLeftKickers(p2List<PhysBody*>* leftKickers)
 
 }
 
-//kickers force
+void ModulePhysics::BuildRightKickers(p2List<PhysBody*>* rightKickers) 
+{
 
+	PhysBody* k = CreateRectangle(75, 186, 17, 5, b2_dynamicBody);
+	PhysBody* k2 = CreateRectangle(90, 182, 1, 1, b2_staticBody);
+
+	revolutedef.bodyA = k2->body;
+	revolutedef.bodyB = k->body;
+	revolutedef.localAnchorB = b2Vec2(0.092, -0.035); //0.08/-0.035
+	revolutedef.enableLimit = true;
+	revolutedef.lowerAngle = -(0.1);
+	revolutedef.upperAngle = (0.2);
+	revolutedef.collideConnected = false;
+	revolute_joint = (b2RevoluteJoint*)world->CreateJoint(&revolutedef);
+
+	rightKickers->add(k);
+}
+
+//kickers force
 void ModulePhysics::KickersForce(b2Vec2 vectforce, b2Vec2 posit, sides rl) {
 	if (rl == LEFT)
 	{
