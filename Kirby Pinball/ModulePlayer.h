@@ -20,7 +20,7 @@ public:
 public:
 
 	//ball
-	PhysBody* ball;
+	PhysBody* ball = nullptr;
 
 	//flippers
 	PhysBody* flippers[2];

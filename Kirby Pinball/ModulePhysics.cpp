@@ -321,7 +321,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
-	fixture.restitution = 0.3f;
+	fixture.restitution = 0.2f;
 
 	b->CreateFixture(&fixture);
 
@@ -753,12 +753,12 @@ void ModulePhysics::BuildLeftKickers(p2List<PhysBody*>* leftKickers)
 	};*/
 
 
-	PhysBody* k = CreateRectangle(50, 186, 17, 5, b2_dynamicBody); //50/186/17/5/dynamic
-	PhysBody* k2 = CreateRectangle(44, 182, 1, 1, b2_staticBody); //44/182/1/1/static
+	PhysBody* k = CreateRectangle(50, 186, 21, 5, b2_dynamicBody); //50/186/17/5/dynamic
+	PhysBody* k2 = CreateRectangle(47, 182, 1, 1, b2_staticBody); //44/182/1/1/static
 
 	revolutedef.bodyA = k2->body;
 	revolutedef.bodyB = k->body;
-	revolutedef.localAnchorB = b2Vec2(-0.06,-0.03);    //-0.08,-0.03  (in green thw 100% working combinations in case you wanna test)
+	revolutedef.localAnchorB = b2Vec2(-0.04,-0.03);    //-0.08,-0.03  (in green thw 100% working combinations in case you wanna test)
 	revolutedef.enableLimit = true;
 	revolutedef.lowerAngle = -(0.1);
 	revolutedef.upperAngle = (1.9);
@@ -772,8 +772,8 @@ void ModulePhysics::BuildLeftKickers(p2List<PhysBody*>* leftKickers)
 void ModulePhysics::BuildRightKickers(p2List<PhysBody*>* rightKickers) 
 {
 
-	PhysBody* k = CreateRectangle(75, 186, 17, 5, b2_dynamicBody);
-	PhysBody* k2 = CreateRectangle(90, 182, 1, 1, b2_staticBody);
+	PhysBody* k = CreateRectangle(75, 186, 21, 5, b2_dynamicBody);
+	PhysBody* k2 = CreateRectangle(88, 182, 1, 1, b2_staticBody);
 
 	revolutedef.bodyA = k2->body;
 	revolutedef.bodyB = k->body;

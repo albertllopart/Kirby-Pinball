@@ -59,7 +59,7 @@ PhysBody* ModulePlayer::CreatePlayerBall()
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
-	fixture.restitution = 0.3f;
+	fixture.restitution = 0.2f;
 
 	b->CreateFixture(&fixture);
 

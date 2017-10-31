@@ -27,9 +27,9 @@ enum sides
 };
 
 // Configuration -----------
-#define SCREEN_WIDTH 1200	
-#define SCREEN_HEIGHT 800
-#define SCREEN_SIZE 1
+#define SCREEN_WIDTH 230
+#define SCREEN_HEIGHT 210
+#define SCREEN_SIZE 3
 #define WIN_FULLSCREEN false
 #define WIN_RESIZABLE false
 #define WIN_BORDERLESS false

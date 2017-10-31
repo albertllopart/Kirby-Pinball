@@ -63,7 +63,7 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	App->renderer->Blit(map_texture, 10, 10);
-	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if(App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{
 		ray_on = !ray_on;
 		ray.x = App->input->GetMouseX();
@@ -74,6 +74,26 @@ update_status ModuleSceneIntro::Update()
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 2.5f));
 		circles.getLast()->data->listener = this;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		circles.add(App->physics->CreateCircle(40, 65, 2.5f));
+		circles.getLast()->data->listener = this;
+		App->player->ball = circles.getLast()->data;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+	{
+		if (App->player->ball != NULL)
+		{
+			p2List_item<PhysBody*>* c = circles.getFirst();
+			while (c->data != App->player->ball)
+			{
+				c = c->next;
+			}
+			circles.del(c);
+		}	
 	}
 
 	
