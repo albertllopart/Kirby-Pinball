@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
+#include "ModuleScore.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -165,6 +166,178 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
+	//DRAW SCORE
+
+	switch (App->score->number_pos1)
+	{
+	case 0:
+		App->renderer->Blit(App->score->zero, 140, 10);
+		break;
+	case 1:
+		App->renderer->Blit(App->score->one, 140, 10);
+		break;
+	case 2:
+		App->renderer->Blit(App->score->two, 140, 10);
+		break;
+	case 3:
+		App->renderer->Blit(App->score->three, 140, 10);
+		break;
+	case 4:
+		App->renderer->Blit(App->score->four, 140, 10);
+		break;
+	case 5:
+		App->renderer->Blit(App->score->five, 140, 10);
+		break;
+	case 6:
+		App->renderer->Blit(App->score->six, 140, 10);
+		break;
+	case 7:
+		App->renderer->Blit(App->score->seven, 140, 10);
+		break;
+	case 8:
+		App->renderer->Blit(App->score->eight, 140, 10);
+		break;
+	case 9:
+		App->renderer->Blit(App->score->nine, 140, 10);
+		break;
+	}
+
+	switch (App->score->number_pos2)
+	{
+	case 0:
+		App->renderer->Blit(App->score->zero, 150, 10);
+		break;
+	case 1:
+		App->renderer->Blit(App->score->one, 150, 10);
+		break;
+	case 2:
+		App->renderer->Blit(App->score->two, 150, 10);
+		break;
+	case 3:
+		App->renderer->Blit(App->score->three, 150, 10);
+		break;
+	case 4:
+		App->renderer->Blit(App->score->four, 150, 10);
+		break;
+	case 5:
+		App->renderer->Blit(App->score->five, 150, 10);
+		break;
+	case 6:
+		App->renderer->Blit(App->score->six, 150, 10);
+		break;
+	case 7:
+		App->renderer->Blit(App->score->seven, 150, 10);
+		break;
+	case 8:
+		App->renderer->Blit(App->score->eight, 150, 10);
+		break;
+	case 9:
+		App->renderer->Blit(App->score->nine, 150, 10);
+		break;
+	}
+
+	switch (App->score->number_pos3)
+	{
+	case 0:
+		App->renderer->Blit(App->score->zero, 160, 10);
+		break;
+	case 1:
+		App->renderer->Blit(App->score->one, 160, 10);
+		break;
+	case 2:
+		App->renderer->Blit(App->score->two, 160, 10);
+		break;
+	case 3:
+		App->renderer->Blit(App->score->three, 160, 10);
+		break;
+	case 4:
+		App->renderer->Blit(App->score->four, 160, 10);
+		break;
+	case 5:
+		App->renderer->Blit(App->score->five, 160, 10);
+		break;
+	case 6:
+		App->renderer->Blit(App->score->six, 160, 10);
+		break;
+	case 7:
+		App->renderer->Blit(App->score->seven, 160, 10);
+		break;
+	case 8:
+		App->renderer->Blit(App->score->eight, 160, 10);
+		break;
+	case 9:
+		App->renderer->Blit(App->score->nine, 160, 10);
+		break;
+	}
+
+	switch (App->score->number_pos4)
+	{
+	case 0:
+		App->renderer->Blit(App->score->zero, 170, 10);
+		break;
+	case 1:
+		App->renderer->Blit(App->score->one, 170, 10);
+		break;
+	case 2:
+		App->renderer->Blit(App->score->two, 170, 10);
+		break;
+	case 3:
+		App->renderer->Blit(App->score->three, 170, 10);
+		break;
+	case 4:
+		App->renderer->Blit(App->score->four, 170, 10);
+		break;
+	case 5:
+		App->renderer->Blit(App->score->five, 170, 10);
+		break;
+	case 6:
+		App->renderer->Blit(App->score->six, 170, 10);
+		break;
+	case 7:
+		App->renderer->Blit(App->score->seven, 170, 10);
+		break;
+	case 8:
+		App->renderer->Blit(App->score->eight, 170, 10);
+		break;
+	case 9:
+		App->renderer->Blit(App->score->nine, 170, 10);
+		break;
+	}
+
+	switch (App->score->lives)
+	{
+	case 0:
+		App->renderer->Blit(App->score->zero, 170, 30);
+		break;
+	case 1:
+		App->renderer->Blit(App->score->one, 170, 30);
+		break;
+	case 2:
+		App->renderer->Blit(App->score->two, 170, 30);
+		break;
+	case 3:
+		App->renderer->Blit(App->score->three, 170, 30);
+		break;
+	case 4:
+		App->renderer->Blit(App->score->four, 170, 30);
+		break;
+	case 5:
+		App->renderer->Blit(App->score->five, 170, 30);
+		break;
+	case 6:
+		App->renderer->Blit(App->score->six, 170, 30);
+		break;
+	case 7:
+		App->renderer->Blit(App->score->seven, 170, 30);
+		break;
+	case 8:
+		App->renderer->Blit(App->score->eight, 170, 30);
+		break;
+	case 9:
+		App->renderer->Blit(App->score->nine, 170, 301);
+		break;
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -174,6 +347,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	App->audio->PlayFx(bonus_fx);
 
+	App->score->current_score += 9;
 	/*
 	if(bodyA)
 	{

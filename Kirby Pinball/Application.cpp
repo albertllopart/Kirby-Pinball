@@ -8,6 +8,7 @@
 #include "ModulePlayer.h"
 #include "ModulePhysics.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleScore.h"
 
 #include "Application.h"
 
@@ -19,8 +20,10 @@ Application::Application()
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this, true);
 	player = new ModulePlayer(this);
+	score = new ModuleScore(this);
 	scene_intro = new ModuleSceneIntro(this);
 	physics = new ModulePhysics(this);
+	
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -39,6 +42,8 @@ Application::Application()
 	
 	// Player
 	AddModule(player);
+	//score
+	AddModule(score);
 }
 
 Application::~Application()
