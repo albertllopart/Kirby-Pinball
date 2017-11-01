@@ -29,6 +29,9 @@ bool ModuleScore::Start()
 	number_pos3 = 0;
 	number_pos4 = 0;
 
+	lives_title = App->textures->Load("pinball/lives.png");
+	score_title = App->textures->Load("pinball/score.png");
+
 	zero = App->textures->Load("pinball/0.png");
 	one = App->textures->Load("pinball/1.png");
 	two = App->textures->Load("pinball/2.png");

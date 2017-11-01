@@ -334,9 +334,12 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(App->score->eight, 170, 30);
 		break;
 	case 9:
-		App->renderer->Blit(App->score->nine, 170, 301);
+		App->renderer->Blit(App->score->nine, 170, 30);
 		break;
 	}
+
+	App->renderer->Blit(App->score->score_title, 185, 10);
+	App->renderer->Blit(App->score->lives_title, 185, 30);
 
 	return UPDATE_CONTINUE;
 }

@@ -17,6 +17,9 @@ public:
 
 public:
 
+	SDL_Texture* lives_title = nullptr;
+	SDL_Texture* score_title = nullptr;
+
 	SDL_Texture* zero = nullptr;
 	SDL_Texture* one = nullptr;
 	SDL_Texture* two = nullptr;
