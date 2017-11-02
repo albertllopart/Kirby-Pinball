@@ -31,8 +31,7 @@ bool ModulePhysics::Start()
 	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
 	world->SetContactListener(this);
 
-	leftKickers = new p2List<PhysBody*>;
-	rightKickers = new p2List<PhysBody*>;
+	
 
 
 	//map collisions
@@ -283,8 +282,8 @@ bool ModulePhysics::Start()
 	map_13->body->SetType(b2_staticBody);
 
 	//kickers
-	BuildLeftKickers(leftKickers);
-	BuildRightKickers(rightKickers);
+	BuildLeftKickers();
+	BuildRightKickers();
 
 	return true;
 }
@@ -744,16 +743,8 @@ PhysBody * ModulePhysics::CreateKicker(int kickerX, int kickerY, int* points, in
 	return CreatePolygon(kickerX, kickerY, points, size, 100, 0, -2, b2_dynamicBody);
 }
 
-void ModulePhysics::BuildLeftKickers(p2List<PhysBody*>* leftKickers)
+void ModulePhysics::BuildLeftKickers()
 {
-	/*int kicker1[10] = {
-		49, 180,
-		49, 175,
-		30, 167,
-		27, 173,
-		36, 177
-	};*/
-
 
 	PhysBody* k = CreateRectangle(50, 186, 21, 5, b2_dynamicBody); //50/186/17/5/dynamic
 	PhysBody* k2 = CreateRectangle(47, 182, 1, 1, b2_staticBody); //44/182/1/1/static
@@ -767,11 +758,11 @@ void ModulePhysics::BuildLeftKickers(p2List<PhysBody*>* leftKickers)
 	revolutedef.collideConnected = false;
 	revolute_joint = (b2RevoluteJoint*)world->CreateJoint(&revolutedef);
 
-	leftKickers->add(k);
+	leftKickers = k;
 
 }
 
-void ModulePhysics::BuildRightKickers(p2List<PhysBody*>* rightKickers) 
+void ModulePhysics::BuildRightKickers() 
 {
 
 	PhysBody* k = CreateRectangle(75, 186, 21, 5, b2_dynamicBody);
@@ -785,32 +776,19 @@ void ModulePhysics::BuildRightKickers(p2List<PhysBody*>* rightKickers)
 	revolutedef.upperAngle = (0.2);
 	revolutedef.collideConnected = false;
 	revolute_joint = (b2RevoluteJoint*)world->CreateJoint(&revolutedef);
-
-	rightKickers->add(k);
+	rightKickers = k;
+	
 }
 
 //kickers force
 void ModulePhysics::KickersForce(b2Vec2 vectforce, b2Vec2 posit, sides rl) {
 	if (rl == LEFT)
 	{
-		p2List_item<PhysBody*>* item = leftKickers->getFirst();
-		while (item != nullptr)
-		{
-			item->data->body->ApplyForce(vectforce, posit, true);
-			item = item->next;
-		}
+		leftKickers->body->ApplyForce(vectforce, posit, true);
 	}
-	else if (rl == RIGHT) {
-		p2List_item<PhysBody*>* item = rightKickers->getFirst();
-		while (item != nullptr)
-		{
-			item->data->body->ApplyForce(vectforce, posit, true);
-			item = item->next;
-		}
+	else if (rl == RIGHT)
+	{
+		rightKickers->body->ApplyForce(vectforce, posit, true);
 	}
 }
 
-p2List<PhysBody*>* ModulePhysics::GetLeftKickers()
-{
-	return leftKickers;
-}

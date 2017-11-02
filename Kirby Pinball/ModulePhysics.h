@@ -53,8 +53,8 @@ public:
 	p2List<PhysBody*>* GetLeftKickers();
 
 	b2RevoluteJoint* CreateFlipperRevoluteJoint(b2Body* bodyA, b2Body* bodyB, b2Vec2 setBodyA, float upperAngle, float lowerAngle);
-	void BuildLeftKickers(p2List<PhysBody*>* leftKickers);
-	void BuildRightKickers(p2List<PhysBody*>* rightKickers);
+	void BuildLeftKickers();
+	void BuildRightKickers();
 	PhysBody* CreateKicker(int kickerX, int kickerY, int* points, int size);
 	void KickersForce(b2Vec2 vectforce, b2Vec2 posit, sides rl);
 
@@ -83,8 +83,8 @@ private:
 
 	bool debug;
 	
-	p2List<PhysBody*>* leftKickers;
-	p2List<PhysBody*>* rightKickers;
+	PhysBody* leftKickers = nullptr;
+	PhysBody* rightKickers = nullptr;
 	b2RevoluteJointDef revolutedef;
 	b2RevoluteJoint* revolute_joint;
 	b2DistanceJoint* distance_joint;
