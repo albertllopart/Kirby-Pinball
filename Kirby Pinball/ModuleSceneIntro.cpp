@@ -28,6 +28,7 @@ bool ModuleSceneIntro::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	left_kicker = App->textures->Load("pinball/Pala1.png");
+	right_kicker = App->textures->Load("pinball/Pala2.png");
 	circle = App->textures->Load("pinball/Ball.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
@@ -132,13 +133,12 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(circle, x, y, NULL, 1.0f, App->player->ball->GetRotation());
 
 	//kickers
-	/*int kicker_x, kicker_y;
-	p2List_item<PhysBody*>* item = App->physics->GetLeftKickers()->getFirst();
-	while (item != nullptr)
-	{
-		item->data->GetPosition(kicker_x, kicker_y);
-		App->renderer->Blit(left_kicker, kicker_x, kicker_y, NULL, 1.0F, item->data->GetRotation());
-	}*/
+	int kicker_x, kicker_y;
+	App->physics->leftKickers->GetPosition(kicker_x, kicker_y); 
+	App->renderer->Blit(left_kicker, kicker_x, kicker_y - 5, NULL, 1.0F, App->physics->leftKickers->GetRotation()-20);
+
+	App->physics->rightKickers->GetPosition(kicker_x, kicker_y);
+	App->renderer->Blit(right_kicker, kicker_x -2, kicker_y - 5, NULL, 1.0f, App->physics->rightKickers->GetRotation() - 340);
 	
 
 	c = boxes.getFirst();

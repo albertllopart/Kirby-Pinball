@@ -78,13 +78,14 @@ public:
 	PhysBody* map_12;
 	PhysBody* map_13;
 	b2World* world;
+	PhysBody* leftKickers = nullptr;
+	PhysBody* rightKickers = nullptr;
 
 private:
 
 	bool debug;
 	
-	PhysBody* leftKickers = nullptr;
-	PhysBody* rightKickers = nullptr;
+	
 	b2RevoluteJointDef revolutedef;
 	b2RevoluteJoint* revolute_joint;
 	b2DistanceJoint* distance_joint;
