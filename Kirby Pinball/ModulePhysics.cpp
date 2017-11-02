@@ -418,7 +418,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2
 
 	b2FixtureDef fixture;
 	fixture.shape = &box;
-	fixture.density = 15.0f;
+	fixture.density = 30.0f;
 
 	b->CreateFixture(&fixture);
 
@@ -762,8 +762,8 @@ void ModulePhysics::BuildLeftKickers(p2List<PhysBody*>* leftKickers)
 	revolutedef.bodyB = k->body;
 	revolutedef.localAnchorB = b2Vec2(-0.04,-0.03);    //-0.08,-0.03  (in green thw 100% working combinations in case you wanna test)
 	revolutedef.enableLimit = true;
-	revolutedef.lowerAngle = -(0.1);
-	revolutedef.upperAngle = (1.9);
+	revolutedef.lowerAngle = -(0.25);
+	revolutedef.upperAngle = (0.2); //0.2
 	revolutedef.collideConnected = false;
 	revolute_joint = (b2RevoluteJoint*)world->CreateJoint(&revolutedef);
 
