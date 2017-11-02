@@ -34,5 +34,7 @@ Note that using this controls may break the game
 ##Links
 
 *Github repository:  https://github.com/albertllopart/Kirby-Pinball
+
 *Albert Llopart: https://github.com/albertllopart
+
 *Arnau Morgadp: https://github.com/morgadoCV
