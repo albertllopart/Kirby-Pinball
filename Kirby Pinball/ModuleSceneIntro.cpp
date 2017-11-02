@@ -11,7 +11,7 @@
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	circle = box = rick = NULL;
+	left_kicker = circle = box = rick = NULL;
 	ray_on = false;
 	sensed = false;
 }
@@ -27,11 +27,13 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	left_kicker = App->textures->Load("pinball/Pala1.png");
 	circle = App->textures->Load("pinball/Ball.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	map_texture = App->textures->Load("pinball/Map.png");
+	game_over = App->textures->Load("pinball/GAME OVER.png");
 
 	
 	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
@@ -129,6 +131,15 @@ update_status ModuleSceneIntro::Update()
 	App->player->ball->GetPosition(x, y);
 	App->renderer->Blit(circle, x, y, NULL, 1.0f, App->player->ball->GetRotation());
 
+	//kickers
+	/*int kicker_x, kicker_y;
+	p2List_item<PhysBody*>* item = App->physics->GetLeftKickers()->getFirst();
+	while (item != nullptr)
+	{
+		item->data->GetPosition(kicker_x, kicker_y);
+		App->renderer->Blit(left_kicker, kicker_x, kicker_y, NULL, 1.0F, item->data->GetRotation());
+	}*/
+	
 
 	c = boxes.getFirst();
 
@@ -343,6 +354,12 @@ update_status ModuleSceneIntro::Update()
 
 	App->renderer->Blit(App->score->score_title, 185, 10);
 	App->renderer->Blit(App->score->lives_title, 185, 30);
+
+	if (game_over_bool)
+	{
+		App->renderer->Blit(App->scene_intro->game_over, 10, 10);
+	}
+	
 
 	return UPDATE_CONTINUE;
 }

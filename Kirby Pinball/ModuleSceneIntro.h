@@ -16,6 +16,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
+	bool game_over_bool = false;
 
 public:
 	p2List<PhysBody*> circles;
@@ -25,6 +26,9 @@ public:
 	PhysBody* sensor;
 	bool sensed;
 
+	SDL_Texture* game_over;
+	SDL_Texture* right_kicker;
+	SDL_Texture* left_kicker;
 	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* rick;
