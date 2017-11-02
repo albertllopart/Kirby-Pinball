@@ -25,6 +25,7 @@ public:
 	//flippers
 	PhysBody* flippers[2];
 	PhysBody* flipper_anchor[2];
+	PhysBody* player;
 	b2RevoluteJoint* flipper_joints[2];
 	SDL_Rect* flipper_sprites[2];
 

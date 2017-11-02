@@ -320,8 +320,8 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 	shape.m_radius = PIXEL_TO_METERS(radius);
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
-	fixture.density = 1.0f;
-	fixture.restitution = 0.2f;
+	fixture.density = 25.0f;
+	fixture.restitution = 0.2f;  
 
 	b->CreateFixture(&fixture);
 
@@ -417,7 +417,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2
 
 	b2FixtureDef fixture;
 	fixture.shape = &box;
-	fixture.density = 1.0f;
+	fixture.density = 15.0f;
 
 	b->CreateFixture(&fixture);
 

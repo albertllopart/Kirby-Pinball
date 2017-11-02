@@ -17,8 +17,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
-	ball = CreatePlayerBall();
-
+	ball = App->physics->CreateCircle(125, 170, 2.5f);
 
 	return true;
 }
@@ -42,15 +41,18 @@ update_status ModulePlayer::Update()
 	{
 		App->physics->KickersForce(b2Vec2(0, -50), b2Vec2(0, 0), RIGHT);
 	}
-
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
+	{
+		ball->body->ApplyForce(b2Vec2(0, -150), b2Vec2(0, 0), true);
+	}
 	return UPDATE_CONTINUE;
 }
 
 PhysBody* ModulePlayer::CreatePlayerBall()
 {
 	b2BodyDef body;
-	body.type = b2_staticBody;
-	body.position.Set(40, 65);
+	body.type = b2_dynamicBody;
+	body.position.Set(150, 200);
 
 	b2Body* b = App->physics->world->CreateBody(&body);
 
@@ -58,7 +60,7 @@ PhysBody* ModulePlayer::CreatePlayerBall()
 	shape.m_radius = 30;
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
-	fixture.density = 1.0f;
+	fixture.density = 25.0f;
 	fixture.restitution = 0.2f;
 
 	b->CreateFixture(&fixture);
