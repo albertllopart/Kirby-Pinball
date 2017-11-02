@@ -368,9 +368,19 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
 
-	App->audio->PlayFx(bonus_fx);
+	p2List_item<PhysBody*>* c = circle_obstacles.getFirst();
 
-	App->score->current_score += 9;
+	while (c != NULL)
+	{
+		if (bodyA == c->data)
+		{
+			App->audio->PlayFx(bonus_fx);
+			App->score->current_score += 9;
+		}
+		c = c->next;
+	}
+
+	
 	/*
 	if(bodyA)
 	{
