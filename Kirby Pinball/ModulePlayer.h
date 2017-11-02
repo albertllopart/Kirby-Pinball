@@ -34,4 +34,7 @@ public:
 	b2RevoluteJoint* mini_flipper_joints[2];
 	SDL_Rect* mini_flipper_sprites[2];
 
+	//
+	int random_throw;
+
 };

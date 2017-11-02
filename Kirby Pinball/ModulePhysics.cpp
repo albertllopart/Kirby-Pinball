@@ -312,6 +312,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 {
 	b2BodyDef body;
 	body.type = b2_dynamicBody;
+	body.bullet = true;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -321,7 +322,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.density = 25.0f;
-	fixture.restitution = 0.2f;  
+	fixture.restitution = 0.2f;
 
 	b->CreateFixture(&fixture);
 

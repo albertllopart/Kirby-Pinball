@@ -19,6 +19,7 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 	CreatePlayerBall();
+	random_throw = -150;
 
 	return true;
 }
@@ -35,6 +36,22 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	int x, y;
+	ball->GetPosition(x, y);
+
+	if (random_throw == -150)
+	{
+		random_throw = -90;
+	}
+	else if (random_throw == -90)
+	{
+		random_throw = -70;
+	}
+	else if (random_throw == -70)
+	{
+		random_throw = -150;
+	}
+
 	if ((App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT))
 	{
 		App->physics->KickersForce(b2Vec2(0, 50), b2Vec2(0, 0), LEFT);
@@ -45,9 +62,9 @@ update_status ModulePlayer::Update()
 		App->physics->KickersForce(b2Vec2(0, -50), b2Vec2(0, 0), RIGHT);
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP && x >= 123)
 	{
-		ball->body->ApplyForce(b2Vec2(0, -150), b2Vec2(0, 0), true);
+		ball->body->ApplyForce(b2Vec2(0, random_throw), b2Vec2(0, 0), true);
 	}
 	
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
@@ -61,8 +78,7 @@ update_status ModulePlayer::Update()
 		App->scene_intro->game_over_bool = false;
 	}
 
-	int x, y;
-	ball->GetPosition(x, y);
+	
 	if (y>200)
 	{
 		App->score->lives--;
